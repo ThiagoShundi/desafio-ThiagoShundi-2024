@@ -44,9 +44,14 @@ class RecintosZoo {
             let temCarnivoro = false;
             let compativel = false;
 
-            if (verAnimal.bioma.includes(rec.bioma)) {
-                compativel = true;
-              }
+            const biomasRecinto = rec.bioma.split(" e ").map((b) => b.trim());
+            const biomaCompativel = verAnimal.bioma.some((b) =>
+              biomasRecinto.includes(b)
+            );
+
+            compativel = biomaCompativel;
+
+            console.log('Compativel:', compativel)
         
             rec.animais.forEach((ani) => {
                 let verEspecie = this.animais[ani.especie.toUpperCase()]
@@ -72,8 +77,8 @@ class RecintosZoo {
             if (verAnimal.carnivoro !== encontrarAnimalCarnivoro) {
                 compativel = false;
               }
-        
-            let espacoExtra = rec.animais.especie = animal ? 0 : 1;
+
+            let espacoExtra = buscarAnimalRecinto === animal ? 0 : 1;
             console.log('EspacoExtra', espacoExtra)
             let espacoNecessario = quantidade * verAnimal.tamanho + espacoExtra;
             console.log('quantidade', quantidade)
@@ -92,6 +97,7 @@ class RecintosZoo {
             }
             } else {
             let espacoExtra = rec.animais.especie = animal ? 0 : 1;
+            console.log('REC.AN.ES', rec.animais.especie)
             console.log('EspacoExtra', espacoExtra)
             let espacoNecessario = quantidade * verAnimal.tamanho + espacoExtra;
             console.log('quantidade', quantidade)
